@@ -6,12 +6,11 @@ public class DataInput {
 
     Scanner scanner = new Scanner(System.in);
 
-    public String getData(String sender, String text) {
-
-        System.out.println("Введіть ім'я користувача: ");
-        sender = scanner.nextLine();
-        System.out.println("Введіть текст повідомлення: ");
-        text = scanner.nextLine();
-        return sender;
+    public DataProcessing.Message getData() {
+        System.out.print("Введіть ім'я користувача: ");
+        String sender = scanner.nextLine();
+        System.out.print("Введіть текст повідомлення: ");
+        String text = scanner.nextLine();
+        return new DataProcessing.Message(sender, text);
     }
 }
