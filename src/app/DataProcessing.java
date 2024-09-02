@@ -2,25 +2,38 @@ package app;
 
 public class DataProcessing implements Printer {
 
+    //Перевизначаємо метод print
     @Override
     public void print(Message message) {
-        if ((message.getSender() == null || message.getSender() == "") &&
-                (message.getText() == null || message.getText() == "")) {
+
+        //Прописуємо умови виклику різних повідомлень за умовами задачі,
+        // використовуємо статичний метод isEmpty замість конструкції message.getSender() == ""
+
+        if ((message.getSender() == null || message.getSender().isEmpty()) &&
+                (message.getText() == null || message.getText().isEmpty())) {
+
+            //Створюємо анонімний клас якщо поля sender та text пусті
+
             Printer anonymous = new Printer() {
                 @Override
                 public void print(Message message) {
-                    System.out.println("Опрацьовується пусте повідомлення від анонімного користувача...");
+                    System.out.println("\nОпрацьовується пусте повідомлення від анонімного користувача...");
                 }
             };
+
+            //В анонімному класі anonymous викликаємо перевизначений метод print, який містить в собі повідомлення
+
             anonymous.print(message);
-        } else if (message.getSender() == null || message.getSender() == "") {
-            System.out.println("Анонімний користувач відправив повідомлення: " + message.text);
-        } else if (message.getText() == null || message.getText() == "") {
-            System.out.println("Користувач " + message.getSender() + " надіслав пусте повідомлення :(");
+        } else if (message.getSender() == null || message.getSender().isEmpty()) {
+            System.out.println("\nАнонімний користувач відправив повідомлення: " + message.text);
+        } else if (message.getText() == null || message.getText().isEmpty()) {
+            System.out.println("\nКористувач " + message.getSender() + " надіслав пусте повідомлення :(");
         } else {
-            System.out.println("Користувач " + message.getSender() + " відправив повідомлення: " + message.getText());
+            System.out.println("\nКористувач " + message.getSender() + " відправив повідомлення: " + message.getText());
         }
     }
+
+        //Створюємо статичний внутрішній клас, який має в собі конструктор, геттери та сеттери
 
         public static class Message {
 
